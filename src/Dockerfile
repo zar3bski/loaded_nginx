@@ -4,6 +4,7 @@ MAINTAINER David Zarebski <zarebskidavid@gmail.com>
 WORKDIR /usr/src/nginx
 
 ENV DOMAIN_NAME my.domain.com
+ENV ADMIN_EMAIL my@adress.com
 ENV LOGIN_URL /admin
 ENV STATICFILES_URL /some/url/to/check
 ENV TO_CONTAINER some_container:80

@@ -66,14 +66,19 @@ printf '%s\n' \
    "maxretry = 3" \
 >> /etc/fail2ban/jail.d/nginx.conf
 
-# EDIT nginx.conf
+# EDIT nginx.conf with CSP
 export DOMAIN_NAME
 export TO_CONTAINER
 envsubst '${DOMAIN_NAME},${TO_CONTAINER},${CSP_DEFAULT},${CSP_SCRIPT},
 ${CSP_STYLE},${CSP_IMG},${CSP_CONNECT},${CSP_FONT},${CSP_OBJECT},
 ${CSP_MEDIA}' < /etc/nginx/conf.template > /etc/nginx/conf.d/nginx.conf
 
-# CSP 
-
-#exec "$@"
-/bin/sh -c "exec nginx -g 'daemon off;'"
+# Cerbot 
+if [[ $HTTPS == True ]]; 
+then
+   (echo $ADMIN_EMAIL; echo A; echo 1; echo 1; echo 2) | certbot --nginx
+   echo "0 13 5 * * /usr/bin/certbot renew --dry-run" | tee -a /etc/crontabs/root > /dev/null
+   tail -f /dev/null
+else 
+   /bin/sh -c "exec nginx -g 'daemon off;'"
+fi

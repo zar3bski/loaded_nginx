@@ -28,7 +28,9 @@ services:
       - 443:443
     environment:
       DOMAIN_NAME: my.domain.com
+      ADMIN_EMAIL: my@adress.com
       LOGIN_URL: /wp-login.php
       TO_CONTAINER: wordpress:80
       CSP_STYLE: "'self' 'unsafe-inline'"
       CSP_SCRIPT: "'self' 'unsafe-inline'"
+
