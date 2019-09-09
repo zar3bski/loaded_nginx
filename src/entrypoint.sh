@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# FAIL TO BAN 
+# FAIL TO BAN (TODO: fix fail2ban)
 touch /etc/fail2ban/filter.d/auth-app.conf
 
 escaped_login_url=${LOGIN_URL/./\\.}
@@ -10,10 +10,14 @@ printf '%s\n' \
    "[INCLUDES]" \
    "before = common.conf" \
    "[Definition]" \
-   "failregex =.*POST (${escaped_login_url}/|${escaped_login_url}).*" \
+   "failregex =.* <HOST> - - .*POST (${escaped_login_url}/|${escaped_login_url}).*" \
 >> /etc/fail2ban/filter.d/auth-app.conf
 
-cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+#cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+rm /etc/fail2ban/jail.conf
+rm /etc/fail2ban/jail.d/alpine-ssh.conf
+
+touch /etc/fail2ban/jail.d/nginx.conf
 printf '%s\n' \
    "[nginx-http-auth]" \
    "enabled  = true" \
@@ -60,12 +64,14 @@ printf '%s\n' \
    "filter   = auth-app" \
    "logpath  = /var/log/nginx/access.log" \
    "maxretry = 3" \
->> /etc/fail2ban/jail.local
+>> /etc/fail2ban/jail.d/nginx.conf
 
 # EDIT nginx.conf
 export DOMAIN_NAME
 export TO_CONTAINER
-envsubst '${DOMAIN_NAME},${TO_CONTAINER}' < /etc/nginx/conf.template > /etc/nginx/conf.d/nginx.conf
+envsubst '${DOMAIN_NAME},${TO_CONTAINER},${CSP_DEFAULT},${CSP_SCRIPT},
+${CSP_STYLE},${CSP_IMG},${CSP_CONNECT},${CSP_FONT},${CSP_OBJECT},
+${CSP_MEDIA}' < /etc/nginx/conf.template > /etc/nginx/conf.d/nginx.conf
 
 # CSP 
 

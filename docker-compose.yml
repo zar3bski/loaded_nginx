@@ -30,4 +30,5 @@ services:
       DOMAIN_NAME: my.domain.com
       LOGIN_URL: /wp-login.php
       TO_CONTAINER: wordpress:80
-
+      CSP_STYLE: "'self' 'unsafe-inline'"
+      CSP_SCRIPT: "'self' 'unsafe-inline'"
