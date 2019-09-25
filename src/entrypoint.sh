@@ -76,7 +76,7 @@ ${CSP_MEDIA}' < /etc/nginx/conf.template > /etc/nginx/conf.d/nginx.conf
 # Cerbot 
 if [[ $HTTPS == True ]]; 
 then
-   (echo $ADMIN_EMAIL; echo A; echo 1; echo 1; echo 2) | certbot --nginx
+   (echo $ADMIN_EMAIL; echo A; echo 1; echo 2) | certbot --nginx
    echo "0 13 5 * * /usr/bin/certbot renew --dry-run" | tee -a /etc/crontabs/root > /dev/null
    tail -f /dev/null
 else 

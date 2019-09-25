@@ -11,6 +11,7 @@ A custom Nginx proxy pass image for the typical web application. Covers most sim
 ### Limitations
 
 * one to one proxy (only one web application)
+* no url rewriting (ressources mentionned in the application should have the right domain name)
 * if `HTTPS`, a certificate will be initiated at container startup. That means that the container shoud be instanciated with [Let's Encrypt rate limits](https://letsencrypt.org/fr/docs/rate-limits/) in mind
 
 
@@ -78,6 +79,5 @@ services:
 
 ## CURRENT ASSIGNMENT
 - fix fail2ban not running
-- fix CSP HTTPS errors (rewrite)
 - static files
 - enforce NGINX (buffer overflow prevention)
