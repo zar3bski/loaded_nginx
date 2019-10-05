@@ -22,7 +22,10 @@ RUN apk update \
 	&& apk add certbot certbot-nginx rsyslog fail2ban
 
 RUN rm /etc/nginx/conf.d/default.conf
-COPY ./nginx.conf /etc/nginx/conf.template
+RUN rm /etc/nginx/nginx.conf
+
+COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./site.conf /etc/nginx/conf.template
 COPY ./entrypoint.sh /usr/src/nginx/entrypoint.sh
 
 ENTRYPOINT ["/usr/src/nginx/entrypoint.sh"]
