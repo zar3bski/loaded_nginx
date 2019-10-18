@@ -1,4 +1,11 @@
 # Nginx Cerberus Proxy
+
+![](https://img.shields.io/docker/cloud/automated/zar3bski/nginx_cerberus.svg)
+![](https://img.shields.io/docker/cloud/build/zar3bski/nginx_cerberus.svg)
+![](https://images.microbadger.com/badges/image/zar3bski/nginx_cerberus.svg)
+![](https://img.shields.io/github/v/release/zar3bski/nginx_cerberus)
+
+
 A custom Nginx proxy pass image for the typical web application. Covers most simple needs 
 
 ## Features
