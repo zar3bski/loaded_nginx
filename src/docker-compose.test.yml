@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  wordpress:
+    image: wordpress:php7.1
+    expose:
+      - 80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+
+  nginx: 
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: nginx
+    command: sh /test/entrypoint.sh
+    volumes: 
+      - ../test/:/test/
+    ports: 
+      - 80:80
+      - 443:443
+    environment:
+      DOMAIN_NAME: my.domain.com
+      ADMIN_EMAIL: my@adress.com
+      LOGIN_URL: /wp-login.php
+      TO_CONTAINER: wordpress:80
+      CSP_STYLE: "'self' 'unsafe-inline'"
+      CSP_SCRIPT: "'self' 'unsafe-inline'"
+      HTTPS: null
+
+  attacker: 
+    image: python:3.7.4-alpine
+    command: sh /test/run_tests.sh
+    depends_on: 
+      - nginx
+    volumes: 
+      - ../test/:/test/
