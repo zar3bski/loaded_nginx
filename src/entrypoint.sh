@@ -14,10 +14,12 @@ printf '%s\n' \
 >> /etc/fail2ban/filter.d/auth-app.conf
 
 #cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-rm /etc/fail2ban/jail.conf
-rm /etc/fail2ban/jail.d/alpine-ssh.conf
+#rm /etc/fail2ban/jail.conf
+#rm /etc/fail2ban/jail.d/alpine-ssh.conf
 
-touch /etc/fail2ban/jail.d/nginx.conf
+rm /etc/fail2ban/jail.conf
+
+touch /etc/fail2ban/jail.conf
 printf '%s\n' \
    "[nginx-badbots]" \
    "enabled  = true" \
@@ -52,8 +54,7 @@ printf '%s\n' \
    "maxretry = 3" \
 >> /etc/fail2ban/jail.d/nginx.conf
 
-
-
+fail2ban-server start
 
 
 # EDIT nginx.conf with CSP
