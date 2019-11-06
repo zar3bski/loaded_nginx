@@ -33,3 +33,5 @@ services:
       TO_CONTAINER: wordpress:80
       CSP_STYLE: "'self' 'unsafe-inline'"
       CSP_SCRIPT: "'self' 'unsafe-inline'"
+      HTTPS: null
+      X_FRAME: DENY

@@ -16,6 +16,8 @@ ENV CSP_CONNECT "'self' "
 ENV CSP_FONT "'self' fonts.googleapis.com"
 ENV CSP_OBJECT "'self' "
 ENV CSP_MEDIA "'self' "
+ENV CSP_FRAME "'self' https://www.google.com https://www.youtube.com https://www.facebook.com"
+ENV X_FRAME SAMEORIGIN
 ENV HTTPS True
 
 RUN apk update \

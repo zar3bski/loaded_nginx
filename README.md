@@ -14,6 +14,8 @@ A custom Nginx proxy pass image for the typical web application. Covers most sim
 * static files serving
 * HTTPS with certbot
 * [Content Security Policy](https://developer.mozilla.org/fr/docs/Web/HTTP/CSP). The execution of inline scripts is disabled by default but could be allowed by overriding CSP environnement variables (see below)
+* [Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Glossary/HSTS)
+* X-FRAME options
 
 ### Limitations
 
@@ -40,6 +42,8 @@ Any of these variables could be overrided to change the container's behavior
 | CSP_FONT       |                                                          | "'self' fonts.googleapis.com" |
 | CSP_OBJECT     |                                                          | "'self' "         |
 | CSP_MEDIA      |                                                          | "'self' "         |
+| CSP_FRAME      |                                                          | "'self' https://www.google.com https://www.youtube.com https://www.facebook.com " |
+| X_FRAME        |                                                          | SAMEORIGIN        |
 | HTTPS          |whether or not should cerbot initialize SSL certs + HTTPS | True              |
 
 ## Usage

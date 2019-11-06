@@ -71,7 +71,7 @@ export DOMAIN_NAME
 export TO_CONTAINER
 envsubst '${DOMAIN_NAME},${TO_CONTAINER},${CSP_DEFAULT},${CSP_SCRIPT},
 ${CSP_STYLE},${CSP_IMG},${CSP_CONNECT},${CSP_FONT},${CSP_OBJECT},
-${CSP_MEDIA}' < /etc/nginx/conf.template > /etc/nginx/conf.d/nginx.conf
+${CSP_MEDIA},${CSP_FRAME},${X_FRAME}' < /etc/nginx/conf.template > /etc/nginx/conf.d/nginx.conf
 
 # Cerbot 
 if [[ $HTTPS == True ]]; 
